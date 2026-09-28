@@ -7,6 +7,14 @@ class GPSData(BaseModel):
     longitud: float
 
 
+def procesar_gps(datos):
+    return {
+        "latitud": datos.latitud,
+        "longitud": datos.longitud,
+        "mensaje": "Datos GPS procesados correctamente"
+    }
+
+
 app = FastAPI()
 
 
@@ -17,4 +25,4 @@ def inicio():
 
 @app.post("/gps")
 def recibir_gps(datos: GPSData):
-    return datos
+    return procesar_gps(datos)
