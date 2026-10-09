@@ -1,6 +1,23 @@
+Entorno virtual de Python
+
 .venv/
-__pycache__/
-*.pyc
+
+Archivos temporales de Python
+
+pycache/
+*.py[cod]
+.pytest_cache/
+
+Datos privados y variables de entorno
+
 .env
+.env.*
+
+Archivos temporales de QGIS
+
 *.qgz~
 *.qgs~
+
+Configuración local del editor
+
+.vscode/
