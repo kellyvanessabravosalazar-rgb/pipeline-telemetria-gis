@@ -70,7 +70,7 @@ def recibir_gps(datos: GPSData):
         guardar_gps(datos)
         return {
             "mensaje": "Datos GPS almacenados correctamente",
-            "vehicle_id": datos.vehicle_id,
+            "vehicle_id": enmascarar_vehicle_id(datos.vehicle_id),
             "latitud": datos.latitud,
             "longitud": datos.longitud,
         }
