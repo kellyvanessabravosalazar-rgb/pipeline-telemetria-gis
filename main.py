@@ -13,7 +13,8 @@ from services.vehicle_data import obtener_datos_vehiculo
 load_dotenv()
 
 app = FastAPI()
-
+def enmascarar_vehicle_id(vehicle_id: str) -> str:
+    return "VHC-****-ABC"
 
 class GPSData(BaseModel):
     vehicle_id: str
@@ -81,7 +82,11 @@ def recibir_gps(datos: GPSData):
 
 
 @app.get("/prediccion/{vehicle_id}")
-def predecir_autonomia(vehicle_id: str, distancia_restante_km: float):
+def predecir_autonomia(
+    vehicle_id: str,
+    distancia_restante_km: float,
+    admin: bool = False,
+):
 
     if distancia_restante_km < 0:
         raise HTTPException(
@@ -133,21 +138,18 @@ def predecir_autonomia(vehicle_id: str, distancia_restante_km: float):
     except ValueError as error:
         raise HTTPException(status_code=400, detail=str(error))
 
+    vehicle_id_respuesta = (
+        vehicle_id if admin else enmascarar_vehicle_id(vehicle_id)
+    )
+
     return {
-        "vehicle_id": vehicle_id,
+        "vehicle_id": vehicle_id_respuesta,
         "distancia_restante_km": distancia_restante_km,
         **resultado,
     }
-    try:
-        guardar_gps(datos)
-        return {
-            "mensaje": "Datos GPS almacenados correctamente",
-            "vehicle_id": datos.vehicle_id,
-            "latitud": datos.latitud,
-            "longitud": datos.longitud,
-        }
-    except Exception as error:
-        raise HTTPException(
-            status_code=500,
-            detail=f"Error al guardar GPS: {type(error).__name__}: {error}",
-        )
+
+    return {
+        "vehicle_id": enmascarar_vehicle_id(vehicle_id),
+        "distancia_restante_km": distancia_restante_km,
+        **resultado,
+    }
