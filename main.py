@@ -3,6 +3,7 @@ from datetime import datetime
 import psycopg
 from dotenv import load_dotenv
 from fastapi import FastAPI
+from fastapi import HTTPException
 from pydantic import BaseModel
 import os
 
@@ -67,11 +68,16 @@ def inicio():
 
 @app.post("/gps")
 def recibir_gps(datos: GPSData):
-    guardar_gps(datos)
-
-    return {
-        "mensaje": "Datos GPS almacenados correctamente",
-        "vehicle_id": datos.vehicle_id,
-        "latitud": datos.latitud,
-        "longitud": datos.longitud,
-    }
+    try:
+        guardar_gps(datos)
+        return {
+            "mensaje": "Datos GPS almacenados correctamente",
+            "vehicle_id": datos.vehicle_id,
+            "latitud": datos.latitud,
+            "longitud": datos.longitud,
+        }
+    except Exception as error:
+        raise HTTPException(
+            status_code=500,
+            detail=f"Error al guardar GPS: {type(error).__name__}: {error}",
+        )

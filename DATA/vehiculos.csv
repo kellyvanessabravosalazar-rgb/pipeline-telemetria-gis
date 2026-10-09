@@ -1,0 +1,7 @@
+vehiculo_id,tipo_vehiculo,combustible_inicial,consumo_litros_km
+BUS_001,bus,80,0.35
+TAXI_001,taxi,65,0.09
+MOTO_001,motocicleta,70,0.035
+BUS_002,bus,55,0.35
+TAXI_002,taxi,40,0.09
+MOTO_002,motocicleta,30,0.035

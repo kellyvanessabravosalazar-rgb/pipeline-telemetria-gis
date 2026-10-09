@@ -1,0 +1,7 @@
+registro_id,vehiculo_id,fecha_hora,latitud,longitud,velocidad_kmh,combustible_pct,origen
+1,BUS_001,2026-10-08T08:00:00,3.4516,-76.5320,25,80,Simulado
+2,TAXI_001,2026-10-08T08:00:10,3.4520,-76.5315,38,65,Simulado
+3,MOTO_001,2026-10-08T08:00:20,3.4524,-76.5310,48,70,Simulado
+4,BUS_002,2026-10-08T08:00:30,3.4530,-76.5305,18,55,Simulado
+5,TAXI_002,2026-10-08T08:00:40,3.4535,-76.5300,12,40,Simulado
+6,MOTO_002,2026-10-08T08:00:50,3.4540,-76.5295,55,30,Simulado
